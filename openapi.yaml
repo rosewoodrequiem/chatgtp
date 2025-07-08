@@ -1,0 +1,74 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics API
+  version: 1.0.0
+  description: Access YouTube Analytics reports for a channel.
+servers:
+  - url: https://youtubeanalytics.googleapis.com
+paths:
+  /v2/reports:
+    get:
+      operationId: getAnalyticsReport
+      summary: Get YouTube Analytics report
+      parameters:
+        - name: ids
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Use `channel==MINE` to get data for the authorized user's channel.
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Start date in YYYY-MM-DD format.
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+          description: End date in YYYY-MM-DD format.
+        - name: metrics
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Comma-separated list of metrics (e.g., views,likes).
+        - name: dimensions
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Comma-separated list of dimensions (e.g., day).
+        - name: filters
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter conditions (e.g., video==abc123).
+      responses:
+        '200':
+          description: Analytics report data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  columnHeaders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        columnType:
+                          type: string
+                        dataType:
+                          type: string
+                  rows:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: string

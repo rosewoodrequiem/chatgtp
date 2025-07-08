@@ -5,6 +5,7 @@ info:
   description: Access YouTube Analytics reports for a channel.
 servers:
   - url: https://youtubeanalytics.googleapis.com
+    description: YouTube Analytics API base URL
 paths:
   /v2/reports:
     get:
